@@ -5,6 +5,7 @@
     android:id="@+id/navigation"
     app:startDestination="@id/titleFragment">
 
+
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.example.android.navigation.TitleFragment"
