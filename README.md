@@ -17,3 +17,23 @@ width, and give it whatever ID you want.
 
 
 Well done, now you have made a fragment pop up within an activity, which is a good practise
+
+### How to add Navigation
+1. Go ahead make the navigation dir within the res dir. Then right click on the navigation dir (within the res) and make a new navigation xml file. Name it navigation. Now 
+to reference this file, use @navigation/navigation. In this file you'll be doing your navigation stuff obviously
+2. Navigate to your activity main xml and find the fragment within its layout and change its name to navHostFragment like this ```android:name="androidx.navigation.fragment.NavHostFragment"``` its ID to "navHostFragment" then add these 2 attributes: 
+```
+app:defaultNavHost="true"
+app:navGraph="@navigation/navigation"
+```
+3. Navigate to your navigation xml and add the two fragments by clicking the plus +  sign. On the navHost there'll be an attribute like this ``` app:startDestination="@id/titleFragment">``` and that will determine which fragment is going to be the starter one. Now while inside navigation xml, 
+click on the TitleFragment and drag it to your GameFragment. This makes an action, meaning that the user goes from title to game
+4. Create the navigation onclick listener. Navigate to your navHost (TitleFragment) and add this code 
+```
+       binding.playButton.setOnClickListener { view: View ->
+            Navigation.findNavController(view).navigate(R.id.action_titleFragment_to_gameFragment)
+        }
+```
+The playButton is a button on the xml layout, the R.id.action_titleFragment_to_gameFragment is your ID for the action.
+
+There you go, you're done now. You've created two fragments that produces an action from title to game
