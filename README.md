@@ -37,3 +37,8 @@ click on the TitleFragment and drag it to your GameFragment. This makes an actio
 The playButton is a button on the xml layout, the R.id.action_titleFragment_to_gameFragment is your ID for the action.
 
 There you go, you're done now. You've created two fragments that produces an action from title to game
+
+###Errors and mistakes to look out for
+1. I made the mistake with the popping feature by clicking on the game won fragment. Instead I must click on the game fragment instead, choose a pop behaviour, and set it to
+title fragment non inclusive. If set to inclusive, it will pop title fragment along with it. Alternatively, you can set the pop behaviour to game fragment then tick the box
+for inclusive. That would also return you to the title fragment when pressing the back button
