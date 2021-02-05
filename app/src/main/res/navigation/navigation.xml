@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/titleFragment"
         android:name="com.example.android.navigation.TitleFragment"
-        android:label="Android Trivia"
+        android:label="@string/android_trivia"
         tools:layout="@layout/fragment_title">
         <action
             android:id="@+id/action_titleFragment_to_gameFragment"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/gameWonFragment"
         android:name="com.example.android.navigation.GameWonFragment"
-        android:label="Success!"
+        android:label="@string/congratulations"
         tools:layout="@layout/fragment_game_won">
         <action
             android:id="@+id/action_gameWonFragment_to_gameFragment"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/gameOverFragment2"
         android:name="com.example.android.navigation.GameOverFragment"
-        android:label="Game Over"
+        android:label="@string/game_over"
         tools:layout="@layout/fragment_game_over">
 
 
@@ -51,4 +51,9 @@
             app:destination="@id/gameFragment"
             app:popUpTo="@id/titleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.android.navigation.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about" />
 </navigation>
