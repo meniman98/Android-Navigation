@@ -100,11 +100,11 @@ class GameFragment : Fragment() {
                     } else {
                         // We've won!  Navigate to the gameWonFragment.
                         // You can use either this or the statement down below. Both work
-                        view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                        view.findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
-                    Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameOverFragment2)
+                    Navigation.findNavController(view).navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment2())
                 }
             }
         }
