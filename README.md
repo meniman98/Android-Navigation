@@ -38,6 +38,30 @@ The playButton is a button on the xml layout, the R.id.action_titleFragment_to_g
 
 There you go, you're done now. You've created two fragments that produces an action from title to game
 
+###How to add a menu on the status bar with an "About page"
+1. Firstly add the About xml layout in your navigation graph. No need for setting a path from anywhere
+2. Create a dir within res named "menu" and create an xml file of type menu and name it overflow_menu
+3. Go within overflow_menu xml and add in a menu item. Your menu item will be the About fragment. Add it there
+4. Now your menu is created, it must appear now. Go to TitleFragment and use this code:
+
+```
+ // for your menu
+        setHasOptionsMenu(true)
+
+    // inflate the menu, make it appear
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    // assign the menu button an action
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+        view!!.findNavController()) ||
+        super.onOptionsItemSelected(item)
+    }
+```
+
 ###Errors and mistakes to look out for
 1. I made the mistake with the popping feature by clicking on the game won fragment. Instead I must click on the game fragment instead, choose a pop behaviour, and set it to
 title fragment non inclusive. If set to inclusive, it will pop title fragment along with it. Alternatively, you can set the pop behaviour to game fragment then tick the box

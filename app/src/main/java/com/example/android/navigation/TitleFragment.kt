@@ -27,11 +27,13 @@ class TitleFragment : Fragment() {
         return binding.root
     }
 
+    // inflate the menu, make it appear
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.overflow_menu, menu)
     }
 
+    // assign the menu button an action
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,
         view!!.findNavController()) ||
