@@ -16,12 +16,13 @@
 
 package com.example.android.navigation
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameWonBinding
@@ -39,10 +40,48 @@ class GameWonFragment : Fragment() {
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController().navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
         }
-        val args = GameWonFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "NumCorrect: ${args.numCorrect}, NumQuestions: ${args.numQuestions}", Toast.LENGTH_LONG).show()
 
+        //    Toast.makeText(context, "NumCorrect: ${args.numCorrect}, NumQuestions: ${args.numQuestions}", Toast.LENGTH_LONG).show()
+
+        // Make menu appear
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    // inflate the menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.winner_menu, menu)
+    }
+
+    // Click listener for the menu item, link it to shareSuccess()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Remember to use this useful statement whenever
+        // you want to produce a switch case for linking
+        // views to actions
+        when (item.itemId) {
+            R.id.share -> shareSuccess()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    // Getting the share intent
+    private fun getShareIntent(): Intent {
+        val args = GameWonFragmentArgs.fromBundle(arguments!!)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, getString(
+                        R.string.share_success_text,
+                        args.numQuestions,
+                        args.numCorrect
+                ))
+        return shareIntent
+    }
+
+    // execute the share function
+    private fun shareSuccess() {
+        startActivity(getShareIntent())
     }
 }

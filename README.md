@@ -66,3 +66,19 @@ There you go, you're done now. You've created two fragments that produces an act
 1. I made the mistake with the popping feature by clicking on the game won fragment. Instead I must click on the game fragment instead, choose a pop behaviour, and set it to
 title fragment non inclusive. If set to inclusive, it will pop title fragment along with it. Alternatively, you can set the pop behaviour to game fragment then tick the box
 for inclusive. That would also return you to the title fragment when pressing the back button
+
+2. This has to be the funniest mistake I made. Just look at this code and tell me what's wrong
+
+```
+
+    // execute the share function
+    private fun shareSuccess() {}
+    override fun startActivity(intent: Intent?) {
+        startActivity(getShareIntent())
+    }
+```
+
+When I clicked the share button and saw it didn't react, I
+inspected every line closely just to deadass find this oh goodness.
+The function body is not wrapping around the logic. I lost it when I saw this.
+Laughed too hard.
