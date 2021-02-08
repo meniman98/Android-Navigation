@@ -56,7 +56,6 @@ class GameWonFragment : Fragment() {
         inflater.inflate(R.menu.winner_menu, menu)
 
 
-
     }
 
     // Click listener for the menu item, link it to shareSuccess()
@@ -86,7 +85,7 @@ class GameWonFragment : Fragment() {
 
 
 
-            return shareIntent
+        return shareIntent
 
 
     }
@@ -97,8 +96,7 @@ class GameWonFragment : Fragment() {
         if (null == getShareIntent().resolveActivity(activity!!.packageManager)) {
             showAlertDialog()
 
-        }
-        else {
+        } else {
             startActivity(getShareIntent())
         }
 

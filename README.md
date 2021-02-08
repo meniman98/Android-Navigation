@@ -62,6 +62,53 @@ There you go, you're done now. You've created two fragments that produces an act
     }
 ```
 
+### How to add produce an intent on a menu item click
+In the game won fragment, a share button has been added on the right corner. Upon clicking it, a share intent is triggered.
+To replicate this, do the following:
+1. Produce the function for the share intent like this
+
+```
+    // Getting the share intent
+    private fun getShareIntent(): Intent {
+        val args = GameWonFragmentArgs.fromBundle(arguments!!)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, getString(
+                        R.string.share_success_text,
+                        args.numQuestions,
+                        args.numCorrect
+                ))
+        return shareIntent
+    }
+```
+
+2. Now add the execution function which provides an alert dialog if the intent failed
+
+```
+    // execute the share function
+    private fun shareSuccess() {
+        // if the intent doesn't resolve correctly
+        if (null == getShareIntent().resolveActivity(activity!!.packageManager)) {
+            showAlertDialog()
+        } else {
+            startActivity(getShareIntent())
+        }
+    }
+```
+
+3. Finally add the click listener like so:
+
+```
+// Sharing from the Menu
+override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+   when (item!!.itemId) {
+       R.id.share -> shareSuccess()
+   }
+   return super.onOptionsItemSelected(item)
+}
+```
+That's Gucci dawg well done
+
 ### Errors and mistakes to look out for
 1. I made the mistake with the popping feature by clicking on the game won fragment. Instead I must click on the game fragment instead, choose a pop behaviour, and set it to
 title fragment non inclusive. If set to inclusive, it will pop title fragment along with it. Alternatively, you can set the pop behaviour to game fragment then tick the box
