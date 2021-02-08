@@ -16,6 +16,7 @@
 
 package com.example.android.navigation
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -53,6 +54,9 @@ class GameWonFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.winner_menu, menu)
+
+
+
     }
 
     // Click listener for the menu item, link it to shareSuccess()
@@ -69,6 +73,8 @@ class GameWonFragment : Fragment() {
 
     // Getting the share intent
     private fun getShareIntent(): Intent {
+
+
         val args = GameWonFragmentArgs.fromBundle(arguments!!)
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain")
@@ -77,11 +83,35 @@ class GameWonFragment : Fragment() {
                         args.numQuestions,
                         args.numCorrect
                 ))
-        return shareIntent
+
+
+
+            return shareIntent
+
+
     }
 
     // execute the share function
     private fun shareSuccess() {
-        startActivity(getShareIntent())
+        // if the intent doesn't resolve correctly
+        if (null == getShareIntent().resolveActivity(activity!!.packageManager)) {
+            showAlertDialog()
+
+        }
+        else {
+            startActivity(getShareIntent())
+        }
+
+    }
+
+    // show a dialog
+    private fun showAlertDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+
+        with(builder) {
+            setTitle("Alert Dialog")
+            setMessage("The sharing intent didn't work")
+            show()
+        }
     }
 }
